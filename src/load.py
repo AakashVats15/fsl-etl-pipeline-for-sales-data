@@ -34,7 +34,7 @@ def load_to_postgres(df: pd.DataFrame, table_name: str):
     DB_PORT = os.getenv("PG_PORT", "5432")
     DB_NAME = os.getenv("PG_DB", "salesdb")
 
-    connection_string = f"postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+    connection_string = f"postgresql+psycopg://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
     try:
         engine = create_engine(connection_string)
