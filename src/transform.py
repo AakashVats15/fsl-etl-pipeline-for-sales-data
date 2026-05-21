@@ -79,3 +79,22 @@ if __name__ == "__main__":
     save_clean_data(df_clean, PROCESSED_DATA_PATH)
 
     print(df_clean.head())
+
+def clean_data(df: pd.DataFrame) -> pd.DataFrame:
+    df = df.rename(columns={
+        "Order ID": "order_id",
+        "Amount": "amount",
+        "Profit": "profit",
+        "Quantity": "quantity",
+        "Category": "category",
+        "Sub-Category": "sub_category",
+        "PaymentMode": "payment_mode"
+    })
+
+    # Convert numeric columns
+    df["amount"] = pd.to_numeric(df["amount"], errors="coerce").astype("float64")
+    df["profit"] = pd.to_numeric(df["profit"], errors="coerce").fillna(0).astype("float64")
+    df["quantity"] = pd.to_numeric(df["quantity"], errors="coerce").astype("int64")
+
+    return df
+
