@@ -4,37 +4,26 @@ import logging
 from sqlalchemy import create_engine
 from sqlalchemy.exc import SQLAlchemyError
 
-# Logging configuration
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
-# Base paths
 BASE_DIR = r"E:\Personal\GitHub\Python Code Repo\fsl-etl-pipeline-for-sales-data"
 CLEAN_DATA_PATH = os.path.join(BASE_DIR, "data", "processed", "clean_data.csv")
 
 
 def load_to_postgres(df: pd.DataFrame, table_name: str):
-    """
-    Load cleaned DataFrame into PostgreSQL table.
 
-    Parameters
-    ----------
-    df : pd.DataFrame
-        Cleaned dataset to load.
-    table_name : str
-        Target table name in PostgreSQL.
-    """
-
-    # Read DB credentials from environment variables
     DB_USER = os.getenv("PG_USER", "postgres")
-    DB_PASS = os.getenv("PG_PASS", "password")
     DB_HOST = os.getenv("PG_HOST", "localhost")
     DB_PORT = os.getenv("PG_PORT", "5432")
     DB_NAME = os.getenv("PG_DB", "salesdb")
+    DB_PASS = "1234"
 
-    connection_string = f"postgresql+psycopg://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+    connection_string = (
+        f"postgresql+pg8000://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+    )
 
     try:
         engine = create_engine(connection_string)
