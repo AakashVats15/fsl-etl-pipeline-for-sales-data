@@ -1,4 +1,6 @@
-# 📘 **README.md — Batch ETL Pipeline for Sales Data**
+# 📘 README.md
+ 
+ ** Batch ETL Pipeline for Sales Data**
 
 ## 📌 **Project Overview**
 This project implements a **batch ETL pipeline** that ingests raw sales data from CSV, transforms it into a clean analytical dataset, and loads it into a **PostgreSQL** database.  
